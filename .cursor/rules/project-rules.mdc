@@ -1,0 +1,159 @@
+
+# �� Project Goal
+Build a React + TypeScript application for project and cost management. It includes 14 key areas: authentication, cost estimation, admin system, project management, UX/UI, integrations, advanced calculators, Twilio SMS, SendGrid Email, currency conversion, admin debugging, monthly planning, cost analysis, and reporting dashboard.
+
+# 📜 Development Rules
+- Use React + TypeScript best practices
+- Use functional components with hooks
+- Use proper state management (Context API, useState, useEffect)
+- Avoid memory leaks — clean up subscriptions and event listeners
+- Components must be clean and testable
+- Code should be organized in a **feature-based structure** (modular)
+- Use Tailwind CSS for styling
+- All prompts and logic must be testable
+- Use proper TypeScript types and interfaces
+- Follow React Router DOM for navigation
+- Use react-hot-toast for notifications
+- **ALWAYS use English** - All code, comments, documentation, and user-facing text must be in English
+- Use clear, descriptive variable and function names in English
+- Write all documentation, guides, and README files in English
+- Use English for all console logs, error messages, and debugging output
+- **NEVER generate CHANGELOG.md files** - Do not create or suggest changelog files
+
+# 📋 Prompt Functionalities (User Stories / Feature Requirements)
+
+## 1. Authentication
+- Registration, login, password reset
+- JWT tokens via Supabase Auth
+- Role-based access (user, role_admin, global_admin)
+- AuthContext for state management
+
+## 2. Cost Estimation
+- Input form with dynamic calculations
+- Budget warnings and alerts
+- Multi-role cost calculation
+- Real-time total cost updates
+
+## 3. Admin System
+- User management (view, edit, delete users)
+- Role catalog management
+- Permission matrix and audit trail
+- Activity logging
+- Admin debugging tools (AdminTest, AuthTest)
+
+## 4. Project Management
+- Create/edit projects
+- Add team members with roles
+- Status system (draft, active, completed, archived)
+- Project sharing and collaboration
+- Project templates
+
+## 5. UX/UI
+- Mobile responsive design
+- Light/dark theme support
+- Modern UI with Tailwind CSS
+- Accessible components
+- Loading states and error handling
+
+## 6. Integrations
+- **Twilio SMS** - Send SMS notifications
+- **SendGrid Email** - Send transactional emails
+- **Supabase** - Database and authentication
+- **Currency APIs** - Live exchange rates
+- **Express backend** - API proxy for external services
+
+## 7. Advanced Calculators
+- Multi-step formulas
+- Multi-currency support with live rates
+- Tax calculations (net/gross)
+- Discount systems
+- Risk assessment
+
+## 8. Currency Conversion
+- Live exchange rates from ExchangeRate.host
+- Multi-currency support (170+ currencies)
+- Real-time conversion calculations
+- Caching for performance
+- Tax and pricing options
+
+## 9. Monthly Planning
+- Monthly cost breakdown
+- Team member allocation
+- Ramp-up and ramp-down periods
+- Milestone tracking
+- Budget forecasting
+
+## 10. Cost Analysis
+- Margin analysis per team member
+- Location-based cost impact
+- Currency fluctuation analysis
+- Cost optimization recommendations
+- Profitability analysis
+
+## 11. Reporting Dashboard
+- Interactive dashboards with widgets
+- Custom report generation
+- Data visualization (charts, graphs)
+- Export functionality (PDF, Excel, CSV)
+- Real-time data updates
+
+## 12. Admin Debugging
+- Console-based debugging tools
+- Database access testing
+- User role verification
+- Error reporting and troubleshooting
+- Network monitoring and logging
+
+## 13. Twilio Integration
+- SMS sending functionality
+- Phone number validation (E.164 format)
+- Error handling and delivery status
+- Test SMS functionality
+- Secure credential management
+
+## 14. Email Integration
+- SendGrid email sending
+- Email templates for notifications
+- Delivery tracking and analytics
+- Bulk email support
+- Template management
+
+# 🏗️ Project Structure
+```
+src/
+├── components/          # Reusable UI components
+├── pages/              # Page components
+├── contexts/           # React contexts (Auth, Theme)
+├── lib/                # Utility functions and services
+├── types/              # TypeScript type definitions
+└── assets/             # Static assets
+```
+
+# 🔧 Technical Stack
+- **Frontend**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS
+- **Backend**: Express.js (for API proxy)
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **State Management**: React Context API
+- **Routing**: React Router DOM
+- **Notifications**: react-hot-toast
+- **Charts**: Chart.js + react-chartjs-2
+- **External APIs**: Twilio, SendGrid, ExchangeRate.host
+
+# 📁 File Organization
+- Use feature-based folder structure
+- Keep components small and focused
+- Separate business logic from UI components
+- Use proper TypeScript interfaces
+- Maintain consistent naming conventions
+
+# 🧪 Testing Strategy
+- Unit tests for utility functions
+- Component testing with React Testing Library
+- Integration tests for API calls
+- E2E tests for critical user flows
+- Mock external services for testing
+
+- Multi-step formulas
+- Multi-currency support
