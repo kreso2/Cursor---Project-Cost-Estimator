@@ -1,3 +1,8 @@
+---
+description:
+globs:
+alwaysApply: true
+---
 
 # �� Project Goal
 Build a React + TypeScript application for project and cost management. It includes 14 key areas: authentication, cost estimation, admin system, project management, UX/UI, integrations, advanced calculators, Twilio SMS, SendGrid Email, currency conversion, admin debugging, monthly planning, cost analysis, and reporting dashboard.
