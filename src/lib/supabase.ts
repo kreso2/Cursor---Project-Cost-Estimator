@@ -479,15 +479,30 @@ export class SupabaseService {
   async createProject(projectData: Omit<Project, 'id' | 'created_at' | 'updated_at'>) {
     // Get exchange rate if different from USD
     let exchangeRate = 1
-    if (projectData.currency !== 'USD') {
+    
+    // Skip exchange rate fetching if disabled via environment variable
+    const skipExchangeRates = import.meta.env.VITE_SKIP_EXCHANGE_RATES === 'true'
+    
+    if (projectData.currency !== 'USD' && !skipExchangeRates) {
       try {
-        const rate = await exchangeRateService.getExchangeRate('USD', projectData.currency)
+        // Add timeout to prevent hanging
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Exchange rate fetch timeout')), 5000)
+        )
+        
+        const ratePromise = exchangeRateService.getExchangeRate('USD', projectData.currency)
+        const rate = await Promise.race([ratePromise, timeoutPromise]) as any
         exchangeRate = rate.rate
         historicalRateTracker.saveRate(rate)
       } catch (error) {
         console.warn('Failed to fetch exchange rate, using 1:1:', error)
+        exchangeRate = 1 // Fallback to 1:1 rate
       }
+    } else if (skipExchangeRates) {
+      console.log('🔄 Exchange rate fetching disabled via environment variable')
     }
+
+    console.log('💾 Creating project with exchange rate:', exchangeRate)
 
     const { data, error } = await this.client
       .from('projects')
@@ -500,7 +515,12 @@ export class SupabaseService {
       .select()
       .single()
     
-    if (error) throw error
+    if (error) {
+      console.error('❌ Database error creating project:', error)
+      throw error
+    }
+    
+    console.log('✅ Project created successfully:', data.id)
     return data
   }
 

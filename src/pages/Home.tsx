@@ -60,8 +60,18 @@ export const Home: React.FC = () => {
     }
 
     setLoading(true)
+    console.log('💾 Starting project save...')
+    
     try {
+      // Add timeout to prevent infinite hanging
+      const saveTimeout = setTimeout(() => {
+        console.error('❌ Save operation timed out')
+        toast.error('Save operation timed out. Please try again.')
+        setLoading(false)
+      }, 30000) // 30 second timeout
+
       if (editingProject) {
+        console.log('📝 Updating existing project:', editingProject.id)
         // Update existing project
         await supabaseService.updateProject(editingProject.id, {
           name: projectName,
@@ -70,8 +80,11 @@ export const Home: React.FC = () => {
           currency: data.project_settings?.target_currency || 'USD',
           total_cost: data.calculations?.total_cost || 0,
         })
+        clearTimeout(saveTimeout)
+        console.log('✅ Project updated successfully')
         toast.success('Project updated successfully!')
       } else {
+        console.log('🆕 Creating new project...')
         // Create new project
         await supabaseService.createProject({
           name: projectName,
@@ -83,13 +96,16 @@ export const Home: React.FC = () => {
           is_template: false,
           status: 'draft'
         })
+        clearTimeout(saveTimeout)
+        console.log('✅ Project created successfully')
         toast.success('Project saved successfully!')
       }
       
       navigate('/projects')
     } catch (error: any) {
-      console.error('Error saving project:', error)
-      toast.error(error.message || 'Failed to save project')
+      console.error('❌ Error saving project:', error)
+      const errorMessage = error.message || 'Failed to save project'
+      toast.error(errorMessage)
     } finally {
       setLoading(false)
     }
